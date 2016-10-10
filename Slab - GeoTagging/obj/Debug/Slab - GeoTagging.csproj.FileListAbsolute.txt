@@ -1,0 +1,10 @@
+c:\users\alex chang\documents\visual studio 2015\Projects\Slab - GeoTagging\Slab - GeoTagging\bin\Debug\Slab - GeoTagging.exe.config
+C:\Users\Alex Chang\Documents\GitHub\Slab - GeoTagging\Slab - GeoTagging\bin\Debug\Slab - GeoTagging.exe.config
+C:\Users\Alex Chang\Documents\GitHub\Slab - GeoTagging\Slab - GeoTagging\bin\Debug\Slab - GeoTagging.exe
+C:\Users\Alex Chang\Documents\GitHub\Slab - GeoTagging\Slab - GeoTagging\bin\Debug\Slab - GeoTagging.pdb
+C:\Users\Alex Chang\Documents\GitHub\Slab - GeoTagging\Slab - GeoTagging\obj\Debug\Slab - GeoTagging.csprojResolveAssemblyReference.cache
+C:\Users\Alex Chang\Documents\GitHub\Slab - GeoTagging\Slab - GeoTagging\obj\Debug\Slab___GeoTagging.Form1.resources
+C:\Users\Alex Chang\Documents\GitHub\Slab - GeoTagging\Slab - GeoTagging\obj\Debug\Slab___GeoTagging.Properties.Resources.resources
+C:\Users\Alex Chang\Documents\GitHub\Slab - GeoTagging\Slab - GeoTagging\obj\Debug\Slab - GeoTagging.csproj.GenerateResource.Cache
+C:\Users\Alex Chang\Documents\GitHub\Slab - GeoTagging\Slab - GeoTagging\obj\Debug\Slab - GeoTagging.exe
+C:\Users\Alex Chang\Documents\GitHub\Slab - GeoTagging\Slab - GeoTagging\obj\Debug\Slab - GeoTagging.pdb
