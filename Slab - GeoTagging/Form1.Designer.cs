@@ -37,6 +37,7 @@
             this.textBox_output = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.button_sync = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label_log
@@ -95,23 +96,35 @@
             // 
             // textBox_output
             // 
-            this.textBox_output.Location = new System.Drawing.Point(16, 97);
+            this.textBox_output.Location = new System.Drawing.Point(12, 143);
             this.textBox_output.Multiline = true;
             this.textBox_output.Name = "textBox_output";
             this.textBox_output.ReadOnly = true;
             this.textBox_output.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_output.Size = new System.Drawing.Size(628, 197);
+            this.textBox_output.Size = new System.Drawing.Size(628, 248);
             this.textBox_output.TabIndex = 6;
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // button_sync
+            // 
+            this.button_sync.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_sync.Location = new System.Drawing.Point(257, 103);
+            this.button_sync.Name = "button_sync";
+            this.button_sync.Size = new System.Drawing.Size(118, 31);
+            this.button_sync.TabIndex = 7;
+            this.button_sync.Text = "Sync";
+            this.button_sync.UseVisualStyleBackColor = true;
+            this.button_sync.Click += new System.EventHandler(this.button_sync_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(656, 306);
+            this.ClientSize = new System.Drawing.Size(652, 403);
+            this.Controls.Add(this.button_sync);
             this.Controls.Add(this.textBox_output);
             this.Controls.Add(this.button_img);
             this.Controls.Add(this.textBox_img);
@@ -137,6 +150,7 @@
         private System.Windows.Forms.TextBox textBox_output;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button button_sync;
     }
 }
 
