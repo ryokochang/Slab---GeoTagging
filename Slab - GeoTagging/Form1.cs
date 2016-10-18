@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;
+using Microsoft.VisualBasic.FileIO;
 
 namespace Slab___GeoTagging
 {
@@ -67,11 +68,12 @@ namespace Slab___GeoTagging
                 textBox_output.AppendText(path_Folder + "\n");
                 textBox_output.AppendText(path_File + "\n");
                 textBox_output.AppendText("\n");
-                this.arquivos = Directory.GetFiles(path_Folder, "*.jpg", SearchOption.TopDirectoryOnly);
+                this.arquivos = Directory.GetFiles(path_Folder, "*.jpg", System.IO.SearchOption.TopDirectoryOnly);
                 for (int i = 0; i < arquivos.Length; i++)
                 {
                     textBox_output.AppendText(arquivos[i] + "\n");
-                }      
+                }
+                read_csv(path_Folder);    
             }          
         }
         void WriteCoordinatesToImage(string Filename, double dLat, double dLong)
@@ -96,6 +98,41 @@ namespace Slab___GeoTagging
                     Pic.SetPropertyItem(pi);
 
                     Pic.Save(Filename);
+                }
+            }
+        }
+
+        void read_csv (string path_folder)
+        {
+            using (TextFieldParser parser = new TextFieldParser(path_File))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    //Processing row
+                    string[] linha = parser.ReadFields();
+                    int indice_hora = 1;
+                    string file_hora = "09:30:14"; 
+                    string hora = linha[indice_hora];
+                    //textBox_output.AppendText(linha[indice_hora] + "\n");                   
+                    if (hora == file_hora)
+                    {
+                        for (int i = 1; i < linha.Length; i++)
+                        {
+                            textBox_output.AppendText(linha[i] + ",");
+                        }
+                        textBox_output.AppendText("\n");                           
+                    }
+                     /*for( int i=0; i < fields.Length; i++)
+                    {
+                        textBox_output.AppendText(fields[1] + "\n");
+                    
+                    foreach (string field in fields)
+                    {
+                        //TODO: Process field
+                        textBox_output.AppendText(fields[i])
+                    }*/
                 }
             }
         }

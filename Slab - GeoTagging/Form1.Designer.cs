@@ -62,9 +62,9 @@
             // 
             // textBox_log
             // 
-            this.textBox_log.Location = new System.Drawing.Point(95, 27);
+            this.textBox_log.Location = new System.Drawing.Point(104, 27);
             this.textBox_log.Name = "textBox_log";
-            this.textBox_log.Size = new System.Drawing.Size(496, 20);
+            this.textBox_log.Size = new System.Drawing.Size(487, 20);
             this.textBox_log.TabIndex = 2;
             // 
             // label_img
@@ -79,9 +79,9 @@
             // 
             // textBox_img
             // 
-            this.textBox_img.Location = new System.Drawing.Point(93, 71);
+            this.textBox_img.Location = new System.Drawing.Point(104, 71);
             this.textBox_img.Name = "textBox_img";
-            this.textBox_img.Size = new System.Drawing.Size(498, 20);
+            this.textBox_img.Size = new System.Drawing.Size(487, 20);
             this.textBox_img.TabIndex = 4;
             // 
             // button_img
