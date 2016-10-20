@@ -121,6 +121,7 @@
             // 
             // Form1
             // 
+            this.AcceptButton = this.button_log;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 398);
@@ -132,6 +133,7 @@
             this.Controls.Add(this.textBox_log);
             this.Controls.Add(this.button_log);
             this.Controls.Add(this.label_log);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Santos Lab - Geotagging";
             this.ResumeLayout(false);

@@ -18,6 +18,7 @@ namespace Slab___GeoTagging
         string path_File;
         string path_Folder;
         string[] arquivos;
+        string[] arquivos_inf;
         public Form1()
         {
             InitializeComponent();
@@ -52,7 +53,6 @@ namespace Slab___GeoTagging
             {
                 textBox_img.Text = folderBrowserDialog1.SelectedPath;
                 this.path_Folder = textBox_img.Text;
-                //string file = folderBrowserDialog1.SelectedPath + Path.DirectorySeparatorChar + "location.txt";
                 textBox_output.AppendText("Pasta selecionada." + "\n");
             }
         }
@@ -68,12 +68,15 @@ namespace Slab___GeoTagging
                 textBox_output.AppendText(path_Folder + "\n");
                 textBox_output.AppendText(path_File + "\n");
                 textBox_output.AppendText("\n");
+                
                 this.arquivos = Directory.GetFiles(path_Folder, "*.jpg", System.IO.SearchOption.TopDirectoryOnly);
                 for (int i = 0; i < arquivos.Length; i++)
                 {
-                    textBox_output.AppendText(arquivos[i] + "\n");
+                    FileInfo arquivos_inf = new FileInfo(arquivos[i]);
+                    string criado = arquivos_inf.LastWriteTime.ToString("HH:mm:ss");
+                    //textBox_output.AppendText(arquivos[i] +" "+ criado + "\n");
+                    read_csv(path_Folder, criado);
                 }
-                read_csv(path_Folder);    
             }          
         }
         void WriteCoordinatesToImage(string Filename, double dLat, double dLong)
@@ -102,7 +105,7 @@ namespace Slab___GeoTagging
             }
         }
 
-        void read_csv (string path_folder)
+        void read_csv (string path_folder, string hour_created)
         {
             using (TextFieldParser parser = new TextFieldParser(path_File))
             {
@@ -113,18 +116,17 @@ namespace Slab___GeoTagging
                     //Processing row
                     string[] linha = parser.ReadFields();
                     int indice_hora = 1;
-                    string file_hora = "09:30:14"; 
-                    string hora = linha[indice_hora];
-                    //textBox_output.AppendText(linha[indice_hora] + "\n");                   
-                    if (hora == file_hora)
+                    string hour = linha[indice_hora];
+                                                                              
+                    if (hour == hour_created)
                     {
                         for (int i = 1; i < linha.Length; i++)
                         {
-                            textBox_output.AppendText(linha[i] + ",");
+                            textBox_output.AppendText(linha[i] + " ,");
                         }
                         textBox_output.AppendText("\n");                           
                     }
-                     /*for( int i=0; i < fields.Length; i++)
+                    /*for( int i=0; i < fields.Length; i++)
                     {
                         textBox_output.AppendText(fields[1] + "\n");
                     
@@ -134,6 +136,7 @@ namespace Slab___GeoTagging
                         textBox_output.AppendText(fields[i])
                     }*/
                 }
+                textBox_output.AppendText("\n-----\n");
             }
         }
     }
