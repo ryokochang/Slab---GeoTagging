@@ -59,6 +59,7 @@ namespace Slab___GeoTagging
 
         private void button_Sync_Click(object sender, EventArgs e)
         {
+             int nao_encontrados = 0;
             if (String.IsNullOrEmpty(path_File) || String.IsNullOrEmpty(path_Folder))
             {
                 textBox_output.AppendText("Arquivos não selecionados." + "\n");
@@ -75,14 +76,20 @@ namespace Slab___GeoTagging
                     FileInfo arquivos_inf = new FileInfo(arquivos[i]);
                     string criado = arquivos_inf.LastWriteTime.ToString("HH:mm:ss");
                     //textBox_output.AppendText(arquivos[i] +" "+ criado + "\n");
-                    read_csv(path_Folder, criado);
+                    if (read_csv(path_Folder, criado) == 0)
+                   {
+                        textBox_output.AppendText("Coordenadas não encontradas.\n");
+                        nao_encontrados++;
+                    }
                 }
+                textBox_output.AppendText("Total de arquivos não taggeados : " + nao_encontrados + "\n");
             }          
         }
-        void WriteCoordinatesToImage(string Filename, double dLat, double dLong)
+        void WriteCoordinatesToImage(string Filename, double dLat, double dLong, double alt)
         {
             byte[] bLat = BitConverter.GetBytes(dLat);
             byte[] bLong = BitConverter.GetBytes(dLong);
+            byte[] balt = BitConverter.GetBytes(alt);
 
             using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(Filename)))
             {
@@ -100,12 +107,25 @@ namespace Slab___GeoTagging
                     pi.Value = bLat;
                     Pic.SetPropertyItem(pi);
 
+                    pi.Id = 0x0006;
+                    pi.Value = balt;
+                    Pic.SetPropertyItem(pi);
+
+                    // Save file into Geotag folder
+                    string geoTagFolder = path_Folder + Path.DirectorySeparatorChar + "geotagged";
+                    string outputfilename = geoTagFolder + Path.DirectorySeparatorChar +
+                        Path.GetFileNameWithoutExtension(Filename) + "_geotag" +
+                        Path.GetExtension(Filename);
+
+                    // Just in case
+                    if (File.Exists(outputfilename))
+                        File.Delete(outputfilename);
+
                     Pic.Save(Filename);
                 }
             }
         }
-
-        void read_csv (string path_folder, string hour_created)
+        int read_csv (string path_folder, string hour_created)
         {
             using (TextFieldParser parser = new TextFieldParser(path_File))
             {
@@ -117,26 +137,25 @@ namespace Slab___GeoTagging
                     string[] linha = parser.ReadFields();
                     int indice_hora = 1;
                     string hour = linha[indice_hora];
-                                                                              
+                    
                     if (hour == hour_created)
-                    {
+                    { 
                         for (int i = 1; i < linha.Length; i++)
                         {
                             textBox_output.AppendText(linha[i] + " ,");
                         }
-                        textBox_output.AppendText("\n");                           
+                        textBox_output.AppendText("\n\n");
+                        
+                        double lat = Convert.ToDouble(linha[2]);
+                        double lon = Convert.ToDouble(linha[3]);
+                        double alt = Convert.ToDouble(linha[4]);
+
+                        WriteCoordinatesToImage(path_Folder, lat,lon,alt);
+                        return 1;
                     }
-                    /*for( int i=0; i < fields.Length; i++)
-                    {
-                        textBox_output.AppendText(fields[1] + "\n");
-                    
-                    foreach (string field in fields)
-                    {
-                        //TODO: Process field
-                        textBox_output.AppendText(fields[i])
-                    }*/
+                    continue;
                 }
-                textBox_output.AppendText("\n-----\n");
+                return 0;
             }
         }
     }
